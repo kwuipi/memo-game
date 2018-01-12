@@ -15,8 +15,8 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = Game(cardPairs: 1)
-        createGame(cardsNumber: 2)
+        game = Game(cardPairs: 2)
+        createGame(cardsNumber: 3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,15 +35,18 @@ class GameViewController: UIViewController {
             addTouch(view: backView)
             backView.contentMode = .scaleAspectFit
             faceView.contentMode = .scaleAspectFit
+            
             backView.image = UIImage(named: "card_back")?.withRenderingMode(.alwaysTemplate)
             backView.backgroundColor = UIColor.white
-            faceView.image = UIImage(named: "card1")
+            
+            faceView.image = UIImage(named: game.cards[i].imageName)
+            
             cardView.layer.borderWidth = 1
             cardView.layer.borderColor = UIColor.lightGray.cgColor
             cardViews.append(cardView)
-            view.addSubview(cardView)
+            self.view.addSubview(cardView)
             cardView.translatesAutoresizingMaskIntoConstraints = false
-            if i % 2 != 0 {
+            if i % 3 != 0 {
                 cardView.leadingAnchor.constraint(equalTo: cardViews[i-1].trailingAnchor, constant: 16).isActive = true
             }
             else {
@@ -83,14 +86,17 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func indexFor(card: UIView) -> Int? {
-        for i in 0..<cardViews.count {
-            if card == cardViews[i] {
-                return i
-            }
+    private func indexFor(card: UIView?) -> Int? {
+//        for i in 0..<cardViews.count {
+//            if card == cardViews[i] {
+//                return i
+//            }
+//        }
+//        return nil
+        guard let card = card else {
+            return nil
         }
-        return nil
-        //return cardViews.index(of: card)
+        return cardViews.index(of: card)
     }
 }
 

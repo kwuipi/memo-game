@@ -18,12 +18,23 @@ class Game {
     
     
     init(cardPairs: Int) {
-        self.cardPairs = cardPairs
-        
+        if cardPairs > 18 {
+            self.cardPairs = 18
+        }
+        else {
+            self.cardPairs = cardPairs
+        }
         var names = [String]()
         cards = [Card]()
-        for i in 0..<cardPairs {
-            let index = arc4random_uniform(UInt32(cardNames.count))
+        var indexArr: [Int] = [0]
+        var index: UInt32 = 0
+        for _ in 0..<cardPairs {
+//            let index = arc4random_uniform(UInt32(cardNames.count))
+//            names.append(cardNames[Int(index)])
+            repeat {
+                index = arc4random_uniform(UInt32(cardNames.count))
+                indexArr.append(Int(index))
+            } while indexArr.filter { $0 != Int(index) }.isEmpty
             names.append(cardNames[Int(index)])
         }
         
