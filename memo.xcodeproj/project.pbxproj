@@ -16,6 +16,9 @@
 		EE5735AD2003D7EC007CF748 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5735AC2003D7EC007CF748 /* Game.swift */; };
 		EE5735AF2003D7F6007CF748 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5735AE2003D7F6007CF748 /* Card.swift */; };
 		EE5735B22003DC5F007CF748 /* Array+Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5735B12003DC5F007CF748 /* Array+Shuffle.swift */; };
+		EE756642200D121A00C1859C /* View+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE756641200D121A00C1859C /* View+Subview.swift */; };
+		EEE4CBD72009009200F48146 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE4CBD62009009200F48146 /* CardView.swift */; };
+		EEE4CC25200933B400F48146 /* CardsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE4CC24200933B400F48146 /* CardsContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		EE5735AC2003D7EC007CF748 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		EE5735AE2003D7F6007CF748 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		EE5735B12003DC5F007CF748 /* Array+Shuffle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Shuffle.swift"; sourceTree = "<group>"; };
+		EE756641200D121A00C1859C /* View+Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Subview.swift"; sourceTree = "<group>"; };
+		EEE4CBD62009009200F48146 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EEE4CC24200933B400F48146 /* CardsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 			children = (
 				EE5735B02003DC17007CF748 /* Utility */,
 				EE5735AB2003D7B5007CF748 /* Model */,
+				EEE4CBD32009000900F48146 /* Views */,
 				7BF67AA71FF414C90098F9CF /* GameCotrollers */,
 				7BF67A971FF40FDF0098F9CF /* Main.storyboard */,
 				7BF67A9A1FF40FDF0098F9CF /* Assets.xcassets */,
@@ -96,8 +103,18 @@
 			isa = PBXGroup;
 			children = (
 				EE5735B12003DC5F007CF748 /* Array+Shuffle.swift */,
+				EE756641200D121A00C1859C /* View+Subview.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		EEE4CBD32009000900F48146 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EEE4CC24200933B400F48146 /* CardsContainer.swift */,
+				EEE4CBD62009009200F48146 /* CardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,12 +189,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE756642200D121A00C1859C /* View+Subview.swift in Sources */,
+				EEE4CBD72009009200F48146 /* CardView.swift in Sources */,
 				7BF67A961FF40FDF0098F9CF /* GameViewController.swift in Sources */,
 				EE5735B22003DC5F007CF748 /* Array+Shuffle.swift in Sources */,
 				7BF67A941FF40FDF0098F9CF /* AppDelegate.swift in Sources */,
 				EE5735AF2003D7F6007CF748 /* Card.swift in Sources */,
 				7BF67AA61FF413B70098F9CF /* ResultViewController.swift in Sources */,
 				EE5735AD2003D7EC007CF748 /* Game.swift in Sources */,
+				EEE4CC25200933B400F48146 /* CardsContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

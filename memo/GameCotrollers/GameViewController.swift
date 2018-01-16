@@ -8,95 +8,58 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, CardViewDelegate {
+    
+    private var cardsContainer: CardsContainer!
     var cardViews = [UIView]()
     var game: Game!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = Game(cardPairs: 2)
-        createGame(cardsNumber: 3)
+        let cardPairs = 8
+        game = Game(cardPairs: cardPairs)
+        createGame(cardsNumber: cardPairs * 2 )
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func createGame(cardsNumber: Int) {
-        for i in 0..<cardsNumber {
-            let backView = UIImageView()
-            let faceView = UIImageView()
-            let cardView = UIView()
-            add(subview: faceView, to: cardView)
-            add(subview: backView, to: cardView)
-            
-            addTouch(view: backView)
-            backView.contentMode = .scaleAspectFit
-            faceView.contentMode = .scaleAspectFit
-            
-            backView.image = UIImage(named: "card_back")?.withRenderingMode(.alwaysTemplate)
-            backView.backgroundColor = UIColor.white
-            
-            faceView.image = UIImage(named: game.cards[i].imageName)
-            
-            cardView.layer.borderWidth = 1
-            cardView.layer.borderColor = UIColor.lightGray.cgColor
-            cardViews.append(cardView)
-            self.view.addSubview(cardView)
-            cardView.translatesAutoresizingMaskIntoConstraints = false
-            if i % 3 != 0 {
-                cardView.leadingAnchor.constraint(equalTo: cardViews[i-1].trailingAnchor, constant: 16).isActive = true
-            }
-            else {
-                cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-            }
-            cardView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
-            cardView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            cardView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        }
-    }
-    
-    private func add(subview: UIView, to cardView: UIView) {
-        cardView.addSubview(subview)
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        subview.topAnchor.constraint(equalTo: cardView.topAnchor).isActive = true
-        subview.leftAnchor.constraint(equalTo: cardView.leftAnchor).isActive = true
-        subview.rightAnchor.constraint(equalTo: cardView.rightAnchor).isActive = true
-        subview.bottomAnchor.constraint(equalTo: cardView.bottomAnchor).isActive = true
         
-    }
-    
-    func addTouch(view: UIView) {
-        let touchRecognizer = UITapGestureRecognizer(target: self, action: #selector(flipView(sender:)))
-        view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(touchRecognizer)
-    }
-    
-    @objc func flipView(sender: UITapGestureRecognizer) {
-        if let imageView = sender.view as? UIImageView {
-            if let tappedIndex = indexFor(card: imageView.superview!) {
-                game.cardFlipped(at: tappedIndex)
-            }
-            let faceView = imageView.superview?.subviews.filter { $0 != imageView }.first
-            if let face = faceView {
-                UIView.transition(from: imageView, to: face, duration: 0.3, options: [.transitionFlipFromLeft, .showHideTransitionViews], completion: nil)
-            }
+        createContainer()
+        
+        for i in 0..<cardsNumber {
+            let cardView = CardView(faceName: game.cards[i].imageName)
+            cardView.delegate = self
+            self.cardsContainer.addSubview(cardView)
+            cardView.translatesAutoresizingMaskIntoConstraints = false
+            
+            cardViews.append(cardView)
         }
+        
+        cardsContainer.layout()
+    }
+    
+    private func createContainer() {
+        cardsContainer = CardsContainer()
+        view.addSubViews(cardsContainer)
+    }
+    
+    func cardFlipped(_ card: CardView) {
+        if let tappedIndex = indexFor(card: card) {
+            game.cardFlipped(at: tappedIndex)
+        }
+
     }
     
     private func indexFor(card: UIView?) -> Int? {
-//        for i in 0..<cardViews.count {
-//            if card == cardViews[i] {
-//                return i
-//            }
-//        }
-//        return nil
         guard let card = card else {
             return nil
         }
         return cardViews.index(of: card)
     }
+    
 }
-

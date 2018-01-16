@@ -29,8 +29,6 @@ class Game {
         var indexArr: [Int] = [0]
         var index: UInt32 = 0
         for _ in 0..<cardPairs {
-//            let index = arc4random_uniform(UInt32(cardNames.count))
-//            names.append(cardNames[Int(index)])
             repeat {
                 index = arc4random_uniform(UInt32(cardNames.count))
                 indexArr.append(Int(index))
